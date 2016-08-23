@@ -1,0 +1,20 @@
+<div layout="column" ng-cloak class="md-inline-form">
+  <md-content layout-padding>
+    <div>
+      <a class="md-raised md-primary" ui-sref="addUser">Add</a>
+    </div>
+
+    <md-list ng-repeat="user in vm.users track by $index">
+      <md-list-item ng-click="false">
+        <span ng-click="vm.goToEditUser({id: user._id, isReadOnly: true})" flex> {{user.firstName}} {{user.lastName}}</span>
+        <md-icon md-font-set="material-icons" ng-click="vm.goToEditUser({id: user._id, isReadOnly: false})"><md-tooltip>Edit</md-tooltip> edit </md-icon>
+        <span>
+          <md-icon md-font-set="material-icons" ng-click="vm.deleteUser(user)" style="color:red;"><md-tooltip>Delete</md-tooltip> delete </md-icon>
+        </span>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</div>
+
+
+<!--https://www.youtube.com/watch?v=XRdi54tYtU4-->

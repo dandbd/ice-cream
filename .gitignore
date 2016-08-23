@@ -1,0 +1,5 @@
+ice-cream.client/app/assets/lib
+ice-cream.server/node_modules
+ice-cream.data/data
+ice-cream.data/log
+*.log

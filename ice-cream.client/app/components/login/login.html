@@ -1,0 +1,43 @@
+<div class="vertical-gap-10"></div>
+
+<div layout="column" layout-align="center center">
+  <form name="loginForm" novalidate="novalidate">
+    <div layout="column" class="loginBox md-whiteframe-10dp">
+
+      <md-content layout="column" class="md-padding">
+
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Username:</label>
+            <input required="" type="email" name="username" ng-model="vm.user.username" minlength="7" ng-pattern="/^.+@.+\..+$/">
+            <div ng-messages="loginForm.username.$error" role="alert" multiple ng-show="loginForm.username.$touched">
+              <div ng-message="required">This field is required.</div>
+              <div ng-message="minlength">Must be at least 10 charactes long.</div>
+              <div ng-message-exp="['pattern', 'email']">Please enter a valid email.</div>
+            </div>
+           </md-input-container>
+        </div>
+
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>New Password</label>
+            <input type="password" name="newPassword" ng-model="vm.user.hashPassword" required=""/>
+            <div class="clearfix">
+              <div ng-messages="loginForm.newPassword.$error" role="alert" multiple ng-show="loginForm.newPassword.$touched">
+                <div ng-message="required" class="message slide-left">This field is required</div>
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout="row" layout-align="center center" style="padding-top:20px;">
+          <md-button class="md-raised md-primary">Login</md-button>
+          <div flex="flex"></div>
+          <md-button href="" md-no-ink="md-no-ink">Forgot Password</md-button>
+        </div>
+      </md-content>
+    </div>
+  </form>
+</div>
+
+<div flex></div>

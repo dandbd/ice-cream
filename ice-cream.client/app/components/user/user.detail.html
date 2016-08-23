@@ -1,0 +1,139 @@
+<div layout="column" ng-cloak class="md-inline-form form-bordered">
+
+  <form name="userForm" novalidate="novalidate">
+
+    <!-- Heading details -->
+    <md-toolbar class="_md">
+      <div class="md-toolbar-tools">
+        <h2>User</h2>
+      </div>
+    </md-toolbar>
+
+    <!-- Sub-heading Shaded background -->
+    <md-content md-theme="docs-dark" class="padding-5">
+      <div layout="row">
+        <div layout="row">
+          <div flex><img with="128px" height="128px" src="{{vm.user.photoPath ? vm.user.photoPath : 'assets/img/Empty.png'}}"></div>
+        </div>
+        <div layout="column" layout-align="end">
+          <div flex><md-datepicker ng-model="vm.user.dateCreated" Disabled></md-datepicker></div>
+          <div flex><md-switch ng-disabled="{{vm.isReadOnly}}" ng-model="vm.user.isGpsOn" aria-label="GPS">GPS</md-switch></div>
+        </div>
+      </div>
+    </md-content>
+
+    <!-- First Name/ Last Name details -->
+    <md-content>
+      <div layout="row" flex><br /><br /></div>
+      <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex>
+          <label>First Name:</label>
+          <input ng-disabled="{{vm.isReadOnly}}" required="" name="firstName" ng-model="vm.user.firstName">
+          <div ng-messages="userForm.firstName.$error" role="alert" ng-show="userForm.firstName.$touched">
+            <div ng-message="required">This field is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>Last:</label>
+          <input ng-disabled="{{vm.isReadOnly}}" required="" name="lastName" ng-model="vm.user.lastName">
+          <div ng-messages="userForm.lastName.$error" role="alert" ng-show="userForm.lastName.$touched">
+            <div ng-message="required">This field is required.</div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-content>
+
+    <!-- Business details -->
+    <md-content>
+      <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex-gt-xs>
+          <label>Business Name:</label>
+          <input ng-disabled="{{vm.isReadOnly}}" ng-model="vm.user.businessName">
+        </md-input-container>
+        <md-input-container>
+          <label>ABN:</label>
+          <input ng-disabled="{{vm.isReadOnly}}" ng-model="vm.user.abn">
+        </md-input-container>
+      </div>
+    </md-content>
+
+    <!-- Email / Phone -->
+    <md-content>
+      <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex-gt-xs>
+          <label>Client Email</label>
+          <input ng-disabled="{{vm.isReadOnly}}" required="" type="email" name="email" ng-model="vm.user.email" minlength="7" ng-pattern="/^.+@.+\..+$/">
+          <div ng-messages="userForm.email.$error" role="alert" multiple ng-show="userForm.email.$touched">
+            <div ng-message="required">This field is required.</div>
+            <div ng-message="minlength">Must be at least 10 charactes long.</div>
+            <div ng-message-exp="['pattern', 'email']">Please enter a valid email.</div>
+          </div>
+        </md-input-container>
+        <md-input-container>
+          <label>Phone Number</label>
+          <input ng-disabled="{{vm.isReadOnly}}" required="" name="phone" ng-model="vm.user.phone" ng-pattern="/^[0-9]{10}$/">
+          <div ng-messages="userForm.phone.$error"  role="alert" multiple ng-show="userForm.phone.$touched">
+            <div ng-message="required">This field is required.</div>
+            <div ng-message="pattern">Please enter a valid phone number.</div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-content>
+
+    <!-- Username / Password and Password Conformation details -->
+    <md-content>
+      <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex-gt-xs>
+          <label>Username:</label>
+          <input ng-disabled="{{vm.isReadOnly}}" required="" type="email" name="username" ng-model="vm.user.username" minlength="7" ng-pattern="/^.+@.+\..+$/">
+          <div ng-messages="userForm.username.$error" role="alert" multiple ng-show="userForm.username.$touched">
+            <div ng-message="required">This field is required.</div>
+            <div ng-message="minlength">Must be at least 10 charactes long.</div>
+            <div ng-message-exp="['pattern', 'email']">Please enter a valid email.</div>
+          </div>
+         </md-input-container>
+      </div>
+    </md-content>
+
+    <md-content>
+      <div layout-gt-xs="row">
+        <md-input-container class="md-block" flex>
+          <label>New Password</label>
+          <input ng-disabled="{{vm.isReadOnly}}" type="password" name="newPassword" ng-model="vm.user.hashPassword" required=""/>
+          <div class="clearfix">
+            <div ng-messages="userForm.newPassword.$error" ng-if="userForm.$submitted || userForm.newPassword.$dirty" ng-messages-multiple="ng-messages-multiple" class="error-messages slide-right">
+              <div ng-message="required" class="message slide-left">This field is required.</div>
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>Re-Type New Password</label>
+          <input ng-disabled="{{vm.isReadOnly}}" type="password" name="confirmPassword" ng-model="vm.user.hashPasswordConfirm" match-password="newPassword" required=""/>
+          <div class="clearfix">
+            <div ng-messages="userForm.confirmPassword.$error" ng-if="userForm.$submitted || userForm.confirmPassword.$dirty" ng-messages-multiple="ng-messages-multiple" class="error-messages slide-right">
+              <div ng-message="required" class="message slide-left">This field is required.</div>
+              <div ng-message="passwordMatch" class="message slide-left">Your passwords did not match.</div>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-content>
+
+    <!-- Buttons -->
+    <md-content>
+      <div ng-switch on="vm.isReadOnly">
+        <div ng-switch-when="false">
+          <div layout-gt-xs="row" layout="row" layout-align="end center">
+            <md-button class="md-raised" ui-sref="users">Cancel</md-button>
+            <md-button class="md-raised md-primary" type="submit" ng-click="vm.save()">{{vm.saveType}}</md-button>
+          </div>
+        </div>
+        <div ng-switch-when="true">
+          <div layout-gt-xs="row" layout="row" layout-align="end center">
+            <md-button class="md-raised" ui-sref="users">Ok</md-button>
+          </div>
+        </div>
+      </div>
+    </md-content>
+  </form>
+</div>

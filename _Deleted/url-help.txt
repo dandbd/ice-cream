@@ -1,0 +1,350 @@
+---------------------------------------------------------
+  <body ng-app="iceCream">
+    Initial
+    <br />
+    <div ui-view></div>
+
+    <br />Detail
+    <div ui-view="menuContent"></div>
+    :
+  </body>
+---------------------------------------------------------
+ModalDialogs.alert("Alert heading...", "This is an alert message", "OK Button")
+  .then (function(){
+    :
+});
+
+
+ModalDialogs.delete("Delete heading...", "'item deleted'", "Cancel Button", "Delete Button")
+  .then (function(){
+    :
+});
+
+---------------------------------------------------------
+ngPassword
+
+https://github.com/gdi2290/angular-password
+
+---------------------------------------------------------
+$state - Redirect URL using state name
+
+https://github.com/angular-ui/ui-router/wiki/Quick-Reference#stategoto--toparams--options
+
+---------------------------------------------------------
+Printing Form Errors:
+<pre>
+  Error: {{userForm.phone.$error}}
+  Valid: {{userForm.phone.$valid}}
+  Phone: {{userForm.phone | json}}
+</pre>
+
+---------------------------------------------------------
+DatePicker:
+http://www.tutorialspoint.com/angular_material/angular_material_datepicker.htm
+
+---------------------------------------------------------
+NodeSchool
+Check this site out.
+
+---------------------------------------------------------
+Style Guide
+
+CODE:
+https://github.com/johnpapa/angular-styleguide
+
+ICONS:
+https://design.google.com/icons/#ic_accessibility
+http://google.github.io/material-design-icons/
+bower install material-design-icons
+
+---------------------------------------------------------
+MEAN Stack
+http://www.bossable.com/303/install-mean-stack/
+
+---------------------------------------------------------
+UI-Router (UI-View)
+http://www.ng-newsletter.com/posts/angular-ui-router.html
+http://engineering.thinknear.com/blog/2015/01/07/advanced-angular-ui-router-part-i/
+
+https://stories.uplabs.com/getting-started-with-angular-material-3ee3cdb8ecd8#.pd1rcuou8
+
+---------------------------------------------------------
+Google Design
+
+https://design.google.com/
+
+Application Colour Selection
+http://www.materialpalette.com/deep-purple/light-blue
+
+(Video)
+http://www.bossable.com/1745/angularjs-material-design-contact-form/
+https://www.youtube.com/watch?v=LHMouDskdOU&list=PL6rhBJX0L3TXiFcNrYKGMxgzjzAFqCa8z#t=63.802834
+
+---------------------------------------------------------
+Angular Material
+
+(Toast)
+https://material.angularjs.org/latest/demo/toast
+
+(Error Checking)
+https://material.angularjs.org/latest/demo/input
+
+
+(Other)
+https://material.angularjs.org/latest/demo/autocomplete
+
+(Size Clarification)
+https://material.angularjs.org/latest/layout/introduction
+
+---------------------------------------------------------
+Angular JS Tutorials. 53 Videos
+https://www.youtube.com/watch?v=DJreBFFDGBo&index=47&list=PL6n9fhu94yhWKHkcL7RJmmXyxkuFB3KSl
+
+---------------------------------------------------------
+Angular Routs
+
+https://github.com/angular-ui/ui-router/wiki/URL-Routing
+https://scotch.io/tutorials/making-skinny-angularjs-controllers
+
+---------------------------------------------------------
+$http
+http://tutlane.com/tutorial/angularjs/angularjs-http-delete-method-http-delete-example-with-parameters
+http://techfunda.com/howto/576/http-delete-server-request
+
+---------------------------------------------------------
+Good Practice
+https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
+
+---------------------------------------------------------
+Ionic Input Types
+http://ionicframework.com/html5-input-types/#date
+
+http://jasonwatmore.com/post/2015/12/09/MEAN-Stack-User-Registration-and-Login-Example.aspx
+
+https://toddmotto.com/minimal-angular-module-syntax-approach-using-an-iife/
+https://toddmotto.com/angular-modules-setters-getters/
+
+https://scotch.io/tutorials/angularjs-best-practices-directory-structure
+
+https://devcenter.heroku.com/articles/mean-apps-restful-api
+https://toddmotto.com/resolve-promises-in-angular-routes/
+
+---------------------------------------------------------
+alert(JSON.stringify(data, null, 4));
+
+angular.isUndefined(value)
+---------------------------------------------------------
+(function () {
+
+  'use strict';
+
+  /* @ngInject */
+  function MainCtrl ($scope, SomeFactory) {
+    this.doSometing = function () {
+      SomeFactory.doSomething();
+    };
+  }
+
+  MainCtrl.$inject = ['$scope', 'SomeFactory'];
+
+  angular
+    .module('app')
+    .controller('MainCtrl', MainCtrl);
+
+})();
+---------------------------------------------------------
+
+    <div class="row">
+      <div class="col col-50">.col.col-50</div>
+      <div class="col">.col</div>
+      <div class="col">.col</div>
+    </div>
+
+    <div class="row">
+      <div class="col col-75">.col.col-75</div>
+      <div class="col">.col</div>
+    </div>
+
+    <div class="row">
+      <div class="col">.col</div>
+      <div class="col col-75">.col.col-75</div>
+    </div>
+
+    <div class="row">
+      <div class="col">.col</div>
+      <div class="col">.col</div>
+    </div>
+
+
+            <div class="list list-inset">
+              <label class="item item-input">
+                <span class="input-label">First Name</span>
+                <input type="text" placeholder="Your first name">
+              </label>
+
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Last Name</span>
+                <input type="text" placeholder="Your last name">
+              </label>
+
+              <label class="item item-input item-floating-label">
+                <span class="input-label">Address</span>
+                <input type="text" placeholder="Your Address">
+              </label>
+
+              <div class="item item-input-inset">
+                <label class="item-input-wrapper">
+                  <input type="text" placeholder="Address 2">
+                </label>
+                <button class="button button-small">Search</button>
+              </div>
+
+              <label class="item item-input">
+                <textarea placeholder="Commment"></textarea>
+              </label>
+
+              <!-- Checkbox button -->
+              <div class="item item-divider">Checkbox Buttons</div>
+              <div class="item item-checkbox">
+                <label class="checkbox">
+                  <input type="checkbox">
+                </label>
+                <span class="input-label">Pop</span>
+              </div>
+
+              <div class="item item-checkbox checkbox-energized">
+                <label class="checkbox">
+                  <input type="checkbox">
+                </label>
+                <span class="input-label">Dance</span>
+              </div>
+
+              <div class="item item-checkbox checkbox-positive">
+                <label class="checkbox">
+                  <input type="checkbox">
+                </label>
+                <span class="input-label">Rock</span>
+              </div>
+
+              <!-- Radio button basic style (icon error)-->
+              <div class="item item-divider">Radio Button</div>
+
+              <label class="item item-radio">
+                <input type="radio" name="social">
+                <div class="item-content">Facebook</div>
+                <i class="radio-icon ion-social-facebook"></i>
+              </label>
+
+              <label class="item item-radio">
+                <input type="radio" name="social">
+                <div class="item-content">Twitter</div>
+                <i class="radio-icon ion-social-twitter"></i>
+              </label>
+
+              <label class="item item-radio">
+                <input type="radio" name="social">
+                <div class="item-content">Youtube</div>
+                <i class="radio-icon ion-social-youtube"></i>
+              </label>
+
+              <!-- Radio button - Ionic angular style  -->
+              <ion-list>
+                <ion-radio ng-model="social" ng-value="'facebook'" icon="ion-social-facebook">Facebook</ion-radio>
+                <ion-radio ng-model="social" ng-value="'twitter'" icon="ion-social-twitter">Twitter</ion-radio>
+                <ion-radio ng-model="social" ng-value="'youtube'" icon="ion-social-youtube">Youtube</ion-radio>
+              </ion-list>
+
+              <!-- Toggle button -->
+              <div class="item item-toggle">
+                <span class="input-label">Asomborso</span>
+                <label class="toggle">
+                  <input type="checkbox">
+                  <div class="track"><div class="handle"></div></div>
+                </label>
+              </div>
+
+            </div>
+---------------------------------------------------------
+<ion-view title="Camera Tab Default Page" id="page2" class=" ">
+    <ion-content padding="true" class="has-header">
+        <h1 id="cameraTabDefaultPage-heading1" style="color:#000000;" class=" ">Heading</h1>
+        <form id="cameraTabDefaultPage-form1" class="list ">
+            <label class="item item-input " id="cameraTabDefaultPage-input1" name="email">
+                <span class="input-label">Email</span>
+                <input type="email" placeholder="">
+            </label>
+            <label class="item item-input " id="cameraTabDefaultPage-input8" name="password">
+                <span class="input-label">Password</span>
+                <input type="password" placeholder="">
+            </label>
+            <label class="item item-input " id="cameraTabDefaultPage-input9" name="phone">
+                <span class="input-label">Phone</span>
+                <input type="tel" placeholder="">
+            </label>
+            <label class="item item-input " id="cameraTabDefaultPage-input10" name="date">
+                <span class="input-label">Date</span>
+                <input type="date" placeholder="">
+            </label>
+            <label class="item item-input " id="cameraTabDefaultPage-input11" name="month">
+                <span class="input-label">Month</span>
+                <input type="month" placeholder="">
+            </label>
+            <label class="item item-input " id="cameraTabDefaultPage-input12" name="time">
+                <span class="input-label">Time</span>
+                <input type="time" placeholder="">
+            </label>
+            <label class="item item-input " id="cameraTabDefaultPage-input2" name="number">
+                <span class="input-label">Number</span>
+                <input type="number" placeholder="">
+            </label>
+            <label class="item item-input " id="cameraTabDefaultPage-input3">
+                <span class="input-label">String Normal</span>
+                <input type="text" placeholder="">
+            </label>
+            <label class="item item-input item-floating-label " id="cameraTabDefaultPage-input13">
+                <span class="input-label">String Floating</span>
+                <input type="text" placeholder="">
+            </label>
+            <label class="item item-input item-stacked-label " id="cameraTabDefaultPage-input14">
+                <span class="input-label">String Stacked</span>
+                <input type="text" placeholder="">
+            </label>
+            <ion-toggle toggle-class="toggle-positive" ng-checked="true" id="cameraTabDefaultPage-toggle1" class=" ">GPS</ion-toggle>
+            <ion-radio id="cameraTabDefaultPage-radio1" name="radio" class=" ">Radio</ion-radio>
+        </form>
+    </ion-content>
+</ion-view>
+
+---------------------------------------------------------
+<md-datepicker
+    name="dateField"
+    ng-init="date = vm.ConvertStringToDate(vm.user.dateCreated);"
+    ng-model="date"
+    md-placeholder="Enter date"
+    required
+    ng-change="vm.user.dateCreated = date.toISOString()">
+</md-datepicker>
+<div class="validation-messages" ng-messages="userForm.dateField.$error">
+  <div ng-message="valid">The entered value is not a date!</div>
+  <div ng-message="required">This date is required!</div>
+</div>
+
+---------------------------------------------------------
+<md-divider></md-divider>
+
+---------------------------------------------------------
+<md-button class="md-fab" aria-label="Edit User" ng-click="vm.editUser({id: user._id})" >
+  <md-icon md-font-set="material-icons"> edit </md-icon>
+  <md-tooltip md-visible="true" md-direction="bottom">
+    Edit User
+  </md-tooltip>
+</md-button>
+
+<a class="md-raised md-primary" ng-click="vm.editUser({id: user._id})">
+  <md-icon md-font-set="material-icons"> edit </md-icon>
+  <md-icon md-font-set="material-icons"> delete </md-icon>
+  <i class="material-icons" alt="Edit User">edit</i>
+  <i class="material-icons" alt="Delete User" style="font-size:24px;color:red;">delete</i>
+</a>
+
+---------------------------------------------------------

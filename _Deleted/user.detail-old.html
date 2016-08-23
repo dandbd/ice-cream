@@ -1,0 +1,373 @@
+<div layout="column" ng-cloak class="md-inline-form bordered-form">
+
+  <form name="userForm" novalidate="novalidate">
+
+    <md-content md-theme="docs-dark" layout-gt-xs="row" layout-padding>
+      <md-item class="item-thumbnail-left item-icon-right" >
+        <img with="128px" height="128px" src="{{vm.user.photoPath}}">
+        <i class="icon ion-android-more-horizontal"></i>
+      </md-item>
+      <div layout="column" flex>
+        <md-input-container>
+          <label>First Name:</label>
+          <input ng-model="vm.user.firstName">
+        </md-input-container>
+        <md-input-container>
+          <label>Last Name:</label>
+          <input ng-model="vm.user.lastName">
+        </md-input-container>
+      </div>
+    </md-content>
+
+
+      <md-content layout-padding>
+
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Client Email</label>
+            <input required="" type="email" name="email" ng-model="vm.user.email" minlength="7" ng-pattern="/^.+@.+\..+$/">
+            <div ng-messages="userForm.email.$error" role="alert" multiple ng-show="userForm.email.$touched">
+              <div ng-message="required">This field is required.</div>
+              <div ng-message="minlength">Must be at least 10 charactes long.</div>
+              <div ng-message-exp="['pattern', 'email']">Please enter a valid email.</div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+            <label>Phone Number</label>
+            <input required="" name="phone" ng-model="vm.user.phone" ng-pattern="/^[0-9]{10}$/" ng-show="userForm.email.$touched">
+            <div ng-messages="userForm.phone.$error" role="alert" multiple>
+              <div ng-message="required">This field is required.</div>
+              <div ng-message="pattern">Please enter a valid phone number.</div>
+            </div>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Business Name:</label>
+            <input ng-model="vm.user.businessName">
+          </md-input-container>
+          <md-input-container>
+            <label>ABN:</label>
+            <input ng-model="vm.user.abn">
+          </md-input-container>
+        </div>
+
+        <md-switch ng-model="vm.user.isGpsOn" aria-label="GPS">GPS</md-switch>
+
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex>
+            <label>Username:</label>
+            <input ng-model="vm.user.username">
+          </md-input-container>
+          <md-input-container class="md-block" flex>
+            <label>Password:</label>
+            <input ng-model="vm.user.password" type="password">
+          </md-input-container>
+        </div>
+
+        <!-- Security Pin -->
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Security PIN:</label>
+          <input name="securityPin" ng-model="vm.user.securityPin" type="password"
+                 required ng-pattern="/^[0-9]{4}$/" md-minlength="4" md-maxlength="4">
+          <div ng-messages="userForm.securityPin.$error" role="alert" multiple>
+            <div ng-message="required" class="my-message">Please enter 4 digit PIN.</div>
+            <div ng-message="pattern" class="my-message">Not valid.</div>
+            <div ng-message="md-maxlength" class="my-message">Must be 4 digits</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Confirtm Security PIN:</label>
+          <input name="confirmSecurityPin" ng-model="vm.user.confirmSecurityPin" type="password"
+                 required ng-pattern="/^[0-9]{4}$/" md-minlength="4" md-maxlength="4">
+          <div ng-messages="userForm.confirmSecurityPin.$error" role="alert" multiple>
+            <div ng-message="required" class="my-message">Please enter 4 digit PIN.</div>
+            <div ng-message="pattern" class="my-message">Not valid.</div>
+            <div ng-message="md-maxlength" class="my-message">Must be 4 digits</div>
+          </div>
+        </md-input-container>
+
+        <md-datepicker
+            name="dateField"
+            ng-init="date = vm.ConvertStringToDate(vm.user.dateCreated);"
+            ng-model="date"
+            md-placeholder="Enter date"
+            required
+            ng-change="vm.user.dateCreated = date.toISOString()">
+        </md-datepicker>
+        <div class="validation-messages" ng-messages="userForm.dateField.$error">
+          <div ng-message="valid">The entered value is not a date!</div>
+          <div ng-message="required">This date is required!</div>
+        </div>
+
+        <md-input-container class="md-block">
+          <label>Address</label>
+          <input ng-model="user.address">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+          <input ng-model="user.address2" placeholder="Address 2">
+        </md-input-container>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>City</label>
+            <input ng-model="user.city">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>State</label>
+            <md-select ng-model="user.state">
+              <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                {{state.abbrev}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Postal Code</label>
+            <input name="postalCode" ng-model="user.postalCode" placeholder="12345"
+                   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">You must supply a postal code.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                code.
+              </div>
+              <div ng-message="md-maxlength" class="my-message">
+                Don't use the long version silly...we don't need to be that specific...
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <md-input-container class="md-block">
+          <label>Biography</label>
+          <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+      </md-content>
+      </form>
+</div>
+
+
+
+
+<!--
+<div class="inset" ng-controller="SwitchDemoCtrl" ng-cloak>
+  <md-switch ng-model="data.cb1" aria-label="Switch 1">
+    Switch 1: {{ data.cb1 }}
+  </md-switch>
+  <md-switch ng-model="data.cb2" aria-label="Switch 2" ng-true-value="'yup'" ng-false-value="'nope'" class="md-warn">
+    Switch 2 (md-warn): {{ data.cb2 }}
+  </md-switch>
+  <md-switch ng-disabled="true" aria-label="Disabled switch" ng-model="disabledModel">
+    Switch (Disabled)
+  </md-switch>
+  <md-switch ng-disabled="true" aria-label="Disabled active switch" ng-model="data.cb4">
+    Switch (Disabled, Active)
+  </md-switch>
+  <md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" ng-model="data.cb5">
+    Switch (md-primary): No Ink
+  </md-switch>
+  <md-switch ng-model="data.cb6" aria-label="Switch 6" ng-change="onChange(data.cb6)">
+    Switch 6 message: {{ message }}
+  </md-switch>
+</div>
+Switch 1: true
+Switch 2 (md-warn): yup
+Switch (Disabled)
+Switch (Disabled, Active)
+Switch (md-primary): No Ink
+Switch 6 message: true
+-->
+
+
+<!--
+var UserSchema = Schema({
+  businessName: String,
+  abn:          String,
+  firstName:    { type:String,  required: 'First Name: is required!' },
+  lastName:     { type:String,  required: 'Last Name: is required!' },
+  username:     { type:String,  required: '{PATH}: is required!' },
+  salt:         { type:String,  required: '{PATH}: is required!' },
+  hashPassword: { type:String,  required: 'Password is required!' },
+  securityPin:  String,
+  isGpsOn:      { type:Boolean, default: false },
+  photoPath:    String,
+  phone:        String,
+  email:        String,
+  dateCreated:  { type: Date, default: Date.now },
+  roles:        [String],
+  locations:    [String]
+});
+-->
+
+
+
+
+<!--
+<div layout="column" ng-cloak class="md-inline-form">
+  <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+    <div>
+      <md-input-container>
+        <label>Business Name:</label>
+        <input ng-model="vm.user.businessName">
+      </md-input-container>
+      <md-input-container>
+        <label>ABN</label>
+        <input ng-model="vm.user.abn">
+      </md-input-container>
+    </div>
+  </md-content>
+  <md-content layout-padding>
+    <div>
+      <form name="userForm">
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>First Name:</label>
+            <input ng-model="vm.user.firstName">
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Last Name:</label>
+            <input ng-model="vm.user.lastName">
+          </md-input-container>
+        </div>
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Username:</label>
+            <input ng-model="vm.user.username">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Password:</label>
+            <input ng-model="vm.user.password" type="password">
+          </md-input-container>
+        </div>
+
+        <div layout-gt-xs="row">
+          <md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date">
+          </md-datepicker>
+        </div>
+
+        <md-input-container class="md-block">
+          <label>Address</label>
+          <input ng-model="user.address">
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+          <input ng-model="user.address2" placeholder="Address 2">
+        </md-input-container>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>City</label>
+            <input ng-model="user.city">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>State</label>
+            <md-select ng-model="user.state">
+              <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                {{state.abbrev}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Postal Code</label>
+            <input name="postalCode" ng-model="user.postalCode" placeholder="12345"
+                   required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+            <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+              <div ng-message="required" class="my-message">You must supply a postal code.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                code.
+              </div>
+              <div ng-message="md-maxlength" class="my-message">
+                Don't use the long version silly...we don't need to be that specific...
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+        <md-input-container class="md-block">
+          <label>Biography</label>
+          <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+      </form>
+    </div>
+  </md-content>
+</div>
+
+
+<md-input-container class="md-block">
+  <label>Hourly Rate (USD)</label>
+  <input required type="number" step="any" name="rate" ng-model="project.rate" min="800"
+         max="4999" ng-pattern="/^1234$/" />
+  <div ng-messages="userForm.rate.$error" multiple md-auto-hide="false">
+    <div ng-message="required">You've got to charge something!</div>
+    <div ng-message="min">You should charge at least $800.</div>
+    <div ng-message="pattern">You should charge exactly $1,234</div>
+    <div ng-message="max">
+      {{userForm.rate.$viewValue | currency:"$":0}} an hour? That's a little ridiculous. I
+      doubt even Bill Clinton could afford that.
+    </div>
+  </div>
+</md-input-container>
+
+<pre>
+  Error: {{userForm.phone.$error}}
+  Valid: {{userForm.phone.$valid}}
+  Phone: {{userForm.phone | json}}
+</pre>
+
+<div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+  Your email must be between 10 and 100 characters long and look like an e-mail address.
+</div>
+<div ng-message-exp="['minlength', 'maxlength']">
+    Your email must be between 5 and 100 characters long
+  </div>
+
+
+
+  <!- - Sub-heading Shaded background - ->
+  <md-content md-theme="docs-dark" class="padding-5">
+    <div layout="row" style="border: 1px solid hotpink;">
+      <div layout="row" style="border: 1px solid hotpink;">
+        <div flex><img with="128px" height="128px" src="{{vm.user.photoPath}}"></div>
+      </div>
+      <div layout="column" layout-align="end" style="border: 1px solid yellow;">
+        <div flex><md-datepicker ng-model="vm.user.dateCreated" Disabled></md-datepicker></div>
+        <div flex><md-switch ng-model="vm.user.isGpsOn" aria-label="GPS">GPS</md-switch></div>
+      </div>
+    </div>
+  </md-content>
+
+
+
+
+  <!- -Template for two column data entry - ->
+  <div layout-gt-xs="row">
+    <md-input-container class="md-block" flex-gt-xs>
+      <label>Business Name:</label>
+      <input ng-model="vm.user.businessName">
+    </md-input-container>
+    <md-input-container>
+      <label>ABN:</label>
+      <input ng-model="vm.user.abn">
+    </md-input-container>
+  </div>
+
+
+
+-->
+
+<!--
+var UserSchema = Schema({
+  businessName: String,
+  abn:          String,
+  firstName:    { type:String,  required: 'First Name: is required!' },
+  lastName:     { type:String,  required: 'Last Name: is required!' },
+  username:     { type:String,  required: '{PATH}: is required!' },
+  salt:         { type:String,  required: '{PATH}: is required!' },
+  hashPassword: { type:String,  required: 'Password is required!' },
+  securityPin:  String,
+  isGpsOn:      { type:Boolean, default: false },
+  photoPath:    String,
+  phone:        String,
+  email:        String,
+  dateCreated:  { type: Date, default: Date.now },
+  roles:        [String],
+  locations:    [String]
+});
+-->
